@@ -1,0 +1,74 @@
+.container {
+	margin: 100px auto;
+}
+
+game {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	width: 300px;
+	height: 300px;
+}
+
+game cell {
+	position: absolute;
+	display: block;
+	float: left;
+	width: 98px;
+	height: 98px;
+	background-color: antiquewhite;
+	/* */
+	border: solid;
+	border-color: aliceblue;
+	border-width: 1px;
+	border-radius: 3px;
+	/* */
+	font-size: 25px;
+	font-family: sans-serif;
+	/* */
+	text-align: center;
+	vertical-align: middle;
+	line-height: 100px;
+	/* */
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-ms-transition: all 0.5s ease-out;
+	-o-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out;
+}
+
+game cell#p0 {
+	background-color: aliceblue !important;
+	z-index: -50;
+	display: none;
+}
+
+
+/** colums **/
+
+.p1, .p2, .p3 {
+	top: 0px;
+}
+
+.p4, .p5, .p6 {
+	top: 100px;
+}
+
+.p7, .p8, .p0 {
+	top: 200px;
+}
+
+
+/** rows **/
+
+.p1, .p4, .p7 {
+	left: 0px;
+}
+
+.p2, .p5, .p8 {
+	left: 100px;
+}
+
+.p3, .p6, .p0 {
+	left: 200px;
+}
