@@ -1,17 +1,22 @@
-build: main.o Link.o
-	g++ *.o -o build
-
-base1: main.o Link.o
-	g++ main.o Link.o -o build
-
+# http://stackoverflow.com/questions/1814270/gcc-g-option-to-place-all-object-files-into-separate-directory
+# http://www.puxan.com/web/howto-write-generic-makefiles/
+# Declaration of variables
+CC = g++
+CC_FLAGS = -w
+ 
+# File names
+EXEC = build
+SOURCES = $(wildcard *.cpp)
+OBJECTS = $(SOURCES:.cpp=.o)
+ 
+# Main target
+$(EXEC): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $(EXEC)
+ 
+# To obtain object files
+%.o: %.cpp
+	$(CC) -c $(CC_FLAGS) $< -o $@
+ 
+# To remove generated files
 clean:
-	rm *.o *.gch build.exe
-
-run: build.exe
-	.\build.exe
-
-main.o: main.cpp
-	g++ -c main.cpp
-
-Link.o: Link.cpp Link.h
-	g++ -c Link.cpp Link.h
+	rm -f $(EXEC) $(OBJECTS)
