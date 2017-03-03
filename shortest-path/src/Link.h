@@ -23,9 +23,9 @@ public:
 
 	Link& operator=(const Link& right);
 
-	char GetC1() const;
-	char GetC2() const;
-	float GetLinkCost() const;
+	char getC1() const;
+	char getC2() const;
+	float getLinkCost() const;
 	
 private:
 	char c1;

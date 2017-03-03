@@ -33,14 +33,6 @@ Link& Link::operator=(const Link& right) {
 	return *this;
 }
 
-char Link::GetC1() const {
-	return this->c1;
-}
-
-char Link::GetC2() const {
-	return this->c2;
-}
-
-float Link::GetLinkCost() const {
-	return this->linkCost;
-}
+char Link::getC1() const { return this->c1; }
+char Link::getC2() const { return this->c2; }
+float Link::getLinkCost() const { return this->linkCost; }
