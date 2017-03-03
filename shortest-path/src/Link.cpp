@@ -9,8 +9,7 @@ Link::Link(char c1, char c2, float linkCost) :
 c1(c1), c2(c2), linkCost(linkCost) {
 }
 
-Link::~Link() {
-}
+Link::~Link() {}
 
 Link& Link::operator=(const Link& right) {
 	// Check for self-assignment!

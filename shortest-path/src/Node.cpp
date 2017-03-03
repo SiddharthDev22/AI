@@ -4,19 +4,16 @@ using namespace std;
 
 Node::Node() {}
 
-Node::Node(char name, Node pParent, Node pNext, float cost, bool explored) :
+Node::Node(char name, Node& pParent, Node& pNext, float cost, bool explored) :
 	name(name),
-	pParent(pParent),
-	pNext(pNext),
+	pParent(&pParent),
+	pNext(&pNext),
 	cost(cost),
 	explored(explored) {}
 
 Node::~Node() {
-	delete name;
-	delete pParent;
-	delete pNext;
-	delete cost;
-	delete explored;
+	//delete pParent;
+	//delete pNext;
 }
 
 Node& Node::operator=(const Node& right) {
@@ -29,8 +26,8 @@ Node& Node::operator=(const Node& right) {
 
 bool Node::isGoal(char goalCity) { return this->name == goalCity; }
 
-char Node::getName() const { return this->Name; }
-Node Node::getParent() const { return this->pParent; }
-Node Node::getNext() const { return this->pNext; }
-float Node::getCost() const { return this->C; }
+char Node::getName() const { return this->name; }
+Node Node::getParent() const { return *this->pParent; }
+Node Node::getNext() const { return *this->pNext; }
+float Node::getCost() const { return this->cost; }
 bool Node::isExplored() const { return this->explored; }
