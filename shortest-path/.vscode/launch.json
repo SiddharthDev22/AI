@@ -1,12 +1,22 @@
 {
 	"version": "0.2.0",
 	"configurations": [
-		
 		{
-			"name": "C++ Launch (Windows)",
+			"name": "C++ Launch Baseline 1",
 			"type": "cppvsdbg",
 			"request": "launch",
-			"program": "${workspaceRoot}/build.exe",
+			"program": "${workspaceRoot}/build/base1.exe",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceRoot}",
+			"environment": [],
+			"externalConsole": false
+		},
+		{
+			"name": "C++ Launch Baseline 2",
+			"type": "cppvsdbg",
+			"request": "launch",
+			"program": "${workspaceRoot}/build/base2.exe",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
