@@ -1,6 +1,6 @@
-using namespace std;
-
 #include "Link.h"
+
+using namespace std;
 
 Link::Link() {
 }

@@ -1,13 +1,13 @@
 #include <iostream>
+#include <vector>
+#include "Link.h"
+#include "functions.h"
 
 using namespace std;
 
-/*
- * 
- */
 int main(int argc, char** argv) {
-	int x = 5;
-	cout<<"hi"<<x;
+	vector<Link> Links;
+	acquireLinks(Links);
+
 	return 0;
 }
-
