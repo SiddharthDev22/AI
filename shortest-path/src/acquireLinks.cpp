@@ -26,7 +26,7 @@ void acquireLinks(vector<Link>& links) {
 				continue;
 			}
 
-			Link* tmp = new Link(city1, city2, weight);
+			links.push_back(*new Link(city1, city2, weight));
 		}
 		
 		fin.close();

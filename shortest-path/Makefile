@@ -23,8 +23,8 @@ OBJECTS = $(subst $(SRC_DIR), $(OBJ_DIR), $(_OBJECTS))
 
 # build all
 build: $(EXE_DIR)/base1 $(EXE_DIR)/base2
-
 	@echo ====== Build Completed ======
+
 # To remove generated files
 clean:
 	rm -f $(OBJECTS) $(EXE_DIR)/*

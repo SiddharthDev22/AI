@@ -16,6 +16,9 @@ Link& Link::operator=(const Link& right) {
 	if (this == &right) // Same object?
 		return *this; // Yes, so skip assignment, and just return *this.
 	// Deallocate, allocate new space, copy values...
+	this->c1 = right.c1;
+	this->c2 = right.c2;
+	this->linkCost = right.linkCost;
 	return *this;
 }
 

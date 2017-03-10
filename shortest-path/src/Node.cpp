@@ -21,6 +21,11 @@ Node& Node::operator=(const Node& right) {
 	if (this == &right) // Same object?
 		return *this; // Yes, so skip assignment, and just return *this.
 	// Deallocate, allocate new space, copy values...
+	this->name = right.name;
+	this->pParent = right.pParent;
+	this->pNext = right.pNext;
+	this->cost = right.cost;
+	this->explored = right.explored;
 	return *this;
 }
 
