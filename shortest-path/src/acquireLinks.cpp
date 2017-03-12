@@ -1,8 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include "Link.h"
-#include "functions.h"
+#include "includes.h"
 
 using namespace std;
 

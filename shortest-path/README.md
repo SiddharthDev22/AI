@@ -115,3 +115,49 @@ File            | Description
 `node.h`        | contains the definition of the class node
 `node.cpp`      | contains the implementation of the class node
 `Makefile`      | now the default target comes from Part 2, name it base2.
+
+
+
+Part 3 [5 points]
+==================
+
+File            | Description
+----------------|-------------------------------------------------------------------------
+`list.h`        | contains the definition of the class list.
+`list.cpp`      | contains the implementation of the class list.
+
+class name: list
+--------------
+- private class members:
+	* `node* pFirstNode`
+	* `node* pLastNode`
+
+- public class members: 
+
+	* `default constructor`
+	* `constructor` that sets all private class members
+	* `destructor`
+	* `=operator`
+	* `void printList(void)`
+	* methods to query the private class members (i.e. to guarantee data hiding)
+
+	The function `printList` prints out on
+	console the names of the nodes in the calling list (it should be easily modified to bring any
+	information about the nodes in the calling list.
+
+file: `node.h`
+--------------
+add 2 functions with signature:
+void expand(vector<link> &links, list* pFrontier);
+void pushNodeToList(list* pFrontier);
+
+file: `node.cpp`
+----------------
+conatins the implementation of the function: 
+expand: that finds potential sibling nodes of the calling node and pushes potential nodes to list pFrontier (by calling
+pushNodetoList(pFrontier)).
+
+file: `main.cpp`
+----------------
+should now construct the first node, initialize the Frontier list using the first node,
+expand potential siblings to the list, and terminates only if a goal is picked.

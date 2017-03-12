@@ -11,15 +11,18 @@ public:
 	Node& operator=(const Node& right);
 
 	/**
-	* @returns {bool} true if the calling node name is the same as the goalCity, and returns false otherwise.
-	*/
+	 * @returns {bool} true if the calling node name is the same as the goalCity, and returns false otherwise.
+	 */
 	bool isGoal(char goalCity);
+	bool isExplored() const;
 
 	char getName() const;
-	Node getParent() const;
-	Node getNext() const;
+	Node* getParent() const;
+	Node* getNext() const;
 	float getCost() const;
-	bool isExplored() const;
+
+	void expand(std::vector<Link> &links, List* pFrontier);
+	void pushNodeToList(List* pFrontier);
 
 private:
 	char name;

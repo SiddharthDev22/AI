@@ -1,7 +1,5 @@
+#include "includes.h"
 #include <iostream>
-#include <vector>
-#include "Link.h"
-#include "functions.h"
 
 using namespace std;
 
