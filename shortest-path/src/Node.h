@@ -35,6 +35,7 @@ private:
 	float cost;
 	bool explored;
 	int expanded;
+	int huristic;
 };
 
 #endif /* NODE_H */

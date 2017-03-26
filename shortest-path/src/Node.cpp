@@ -5,7 +5,7 @@ using namespace std;
 
 Node::Node() {
 	pParent = pNext = NULL;
-	name = cost = explored = expanded = 0;
+	name = cost = huristic = explored = expanded = 0;
 }
 
 Node::Node(char name, Node* pParent, Node* pNext, float cost, bool explored) :
@@ -14,7 +14,8 @@ Node::Node(char name, Node* pParent, Node* pNext, float cost, bool explored) :
 	pNext(pNext),
 	cost(cost),
 	explored(explored),
-	expanded(NULL) {}
+	expanded(NULL),
+	huristic(0) {}
 
 Node::~Node() {
 	pParent->pNext = NULL;
@@ -31,6 +32,7 @@ Node& Node::operator=(const Node& right) {
 	this->pNext = right.pNext;
 	this->cost = right.cost;
 	this->explored = right.explored;
+	this->huristic = right.huristic;
 	this->expanded = right.expanded;
 	
 	return *this;
@@ -38,7 +40,8 @@ Node& Node::operator=(const Node& right) {
 
 ostream& operator<<(std::ostream& os, const Node& obj) {
 	os << obj.name << "\t\t" 
-		<< obj.pParent->name << "\t\t" 
+		<< (obj.pParent != NULL ? obj.pParent->name : ' ') << "\t\t" 
+		<< obj.huristic << "\t\t" 
 		<< obj.cost << "\t\t" 
 		<< obj.expanded;
 
@@ -50,7 +53,7 @@ bool Node::isGoal(char goalCity) { return this->name == goalCity; }
 char Node::getName() const { return this->name; }
 Node* Node::getParent() const { return this->pParent; }
 Node* Node::getNext() const { return this->pNext; }
-float Node::getCost() const { return this->cost; }
+float Node::getCost() const { return this->cost + this->huristic; }
 bool Node::isExplored() const { return this->explored; }
 int Node::getExpanded() const { return this->expanded; }
 
@@ -59,6 +62,7 @@ int Node::getExpanded() const { return this->expanded; }
  * pushes potential nodes to list pFrontier (by calling pushNodetoList(pFrontier)).
  */
 void Node::expand(vector<Link> &links, List* pFrontier) {
+	this->explored = true;
 
 	for (int i = 0; i < links.size(); i++) {
 		if (links[i].getC1() == this->name || links[i].getC2() == this->name) {
@@ -66,7 +70,7 @@ void Node::expand(vector<Link> &links, List* pFrontier) {
 			Node tmpNode;
 			tmpNode.name =	(links[i].getC1() == this->name) ? links[i].getC2() : links[i].getC1();
 			tmpNode.pParent = this;
-			tmpNode.cost = 0; // <<<<<<<<<<<<<<<
+			tmpNode.cost = this->cost + links[i].getLinkCost(); // <<<<<<<<<<<<<<<
 
 			if (tmpNode.isQualified(pFrontier)) {
 				tmpNode.pushNodeToList(pFrontier);
@@ -93,6 +97,8 @@ bool Node::isQualified(List* pFrontier){
 
 	Node* current = pFrontier->getFirstNode();
 	
+	// if not same as parrent
+
 	while (current != NULL){
 		if(current->name == this->name){
 			//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
