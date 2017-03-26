@@ -7,18 +7,18 @@ class List {
 public:
 
 	List();
-	List(Node& pFirstNode, Node& pLastNode);
+	List(Node* pFirstNode, Node* pLastNode);
 	virtual ~List();
 
 	List& operator=(const List& right);
+	friend std::ostream& operator<<(std::ostream& os, const List& obj);
 
 	Node* getFirstNode() const;
 	Node* getLastNode() const;
 
 	void setLastNode(Node* LastNode);
 
-
-	void printList();
+	void printResult();
 
 private:
 	Node* pFirstNode;

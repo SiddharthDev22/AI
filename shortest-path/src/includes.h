@@ -5,6 +5,7 @@ class Node;
 class Link;
 class List;
 
+#include <iostream>
 #include <vector>
 
 #include "Node.h"

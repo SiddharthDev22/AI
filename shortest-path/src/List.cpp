@@ -4,11 +4,12 @@
 using namespace std;
 
 List::List() {
+	pFirstNode = pLastNode = NULL;
 }
 
-List::List(Node& pFirstNode, Node& pLastNode) :
-	pFirstNode (&pFirstNode),
-	pLastNode (&pLastNode) {}
+List::List(Node* pFirstNode, Node* pLastNode) :
+	pFirstNode (pFirstNode),
+	pLastNode (pLastNode) {}
 
 List::~List() {
 	delete pFirstNode;
@@ -25,17 +26,42 @@ List& List::operator=(const List& right) {
 	return *this;
 }
 
+ostream& operator<<(std::ostream& os, const List& obj) {
+
+	Node* current = obj.pFirstNode;
+	os << "name" << "\t" 
+		<< "parent" << "\t" 
+		<< "cost" << "\t" 
+		<< "expanded";
+	
+	while (current != NULL){
+		os << current;
+		current = current->getNext();
+	}
+
+	return os;
+}
+
 Node* List::getFirstNode() const { return this->pFirstNode; }
 Node* List::getLastNode() const { return this->pLastNode; }
 
 void List::setLastNode(Node* LastNode) { pLastNode = LastNode; }
 
-void List::printList() {
+/**
+ * print to console the solution path along with its cost
+ * It should also display number of nodes expanded 
+ * i.e. how many times the method node::expand(vector<link>, list*) was called
+ */
+void List::printResult(){
+	
 	Node* current = this->pFirstNode;
-	cout << "name" << "\t" << "parent" << "\t" << "cost";
+	cout << "name" << "\t" 
+		<< "parent" << "\t" 
+		<< "cost" << "\t" 
+		<< "expanded";
 	
 	while (current != NULL){
-		cout << current->getName() << "\t\t" << current->getParent()->getName() << "\t\t" << current->getCost() ;
-		current = current->getNext();
+		cout << current;
+		current = current->getParent();
 	}
 }

@@ -161,3 +161,33 @@ file: `main.cpp`
 ----------------
 should now construct the first node, initialize the Frontier list using the first node,
 expand potential siblings to the list, and terminates only if a goal is picked.
+
+
+
+Part 4 [5 points]
+==================
+You should build the following 2 functions:
+* `bool node::isQualified(list* pFrontier)`   
+	this function determines if the calling node (which is a potential node) is qualified to be added to the input argument list.   
+	The function should also discard from the list any node once a cheaper replacement for it is found.   
+* `void list::printResult(void)`   
+	this function is to print to console the solution path along with its cost.   
+	It should also display number of nodes expanded (i.e. how many times the method `node::expand(vector<link>, list*)` was called).   
+* `void list::printList(void)`   
+	update this function such that it prints to console (for a given node):   
+	name | parent's name | cost
+	-----|---------------|-----
+	b    | a             | 4   
+	Also, update all the required methods/classes such that the algorithm is capable of solving the search problem using any of the 5 studied algorithms.   
+
+
+
+Notes:
+=======
+1. A student has only one chance for graded discussion.
+2. Have all the requested files ready while at discussion (including Makefile.
+3. Don't sign up for the graded discussion if any of the following is true:
+	* Code doesn't compile
+	* The executable doesn't run
+	* A segmentation fault pops up at any moment during runtime
+4. No copied code will be accepted.

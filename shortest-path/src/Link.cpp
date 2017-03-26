@@ -6,8 +6,9 @@ Link::Link() {
 }
 
 Link::Link(char c1, char c2, float linkCost) :
-c1(c1), c2(c2), linkCost(linkCost) {
-}
+	c1(c1),
+	c2(c2),
+	linkCost(linkCost) {}
 
 Link::~Link() {}
 
