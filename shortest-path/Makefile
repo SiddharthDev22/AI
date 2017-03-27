@@ -8,14 +8,16 @@
 # 	$^ evaluates to library.cpp main.cpp
 
 
-# complier options
-CC = g++
-CC_FLAGS = -w
-
 # directory names
 SRC_DIR = src
 OBJ_DIR = obj
+INC_DIR = inc
+LIB_DIR = lib
 EXE_DIR = build
+
+# complier options
+CC = g++
+CC_FLAGS = -w -I$(INC_DIR)/ -L$(LIB_DIR)/
 
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
 _OBJECTS = $(SOURCES:.cpp=.o)
@@ -46,11 +48,11 @@ $(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp
 	$(CC) -c $(CC_FLAGS) $< -o $@
 
 # build acquireLinks.o used in baseline 2
-$(OBJ_DIR)/acquireLinks.o: $(SRC_DIR)/acquireLinks.cpp $(SRC_DIR)/functions.h
+$(OBJ_DIR)/acquireLinks.o: $(SRC_DIR)/acquireLinks.cpp $(INC_DIR)/functions.h
 	mkdir -p $(OBJ_DIR)
 	$(CC) -c $(CC_FLAGS) $< -o $@
 
 # build all .o
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(SRC_DIR)/%.h
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.h
 	mkdir -p $(OBJ_DIR)
 	$(CC) -c $(CC_FLAGS) $< -o $@
