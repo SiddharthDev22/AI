@@ -15,8 +15,8 @@ Node::Node(char name) :
 }
 
 Node::~Node() {
-	pParent->pNext = NULL;
-	delete pNext;
+	//pParent->pNext = NULL;
+	//delete pNext;
 }
 
 Node& Node::operator=(const Node& right) {
@@ -92,11 +92,14 @@ void Node::rmNodeFromList(List* pFrontier) {
 	while (current != NULL) {
 		if (current->pParent == this) {
 			//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< fix recurgent
-			//current->rmNodeFromList(pFrontier);
-			delete current;
-		} else if (current->pNext == this) {
-			current->pNext = current->pNext == NULL ? NULL : current->pNext->pNext;
-			this->pNext = this->pNext == NULL ? NULL : this->pNext->pNext;
+			current->rmNodeFromList(pFrontier);
+			//delete current; //<<<<<<<<<<<<<<<<<<<<< possible mem leak
+		} 
+		if (current->pNext == this) {
+			if (this == pFrontier->getLastNode()) {
+				pFrontier->setLastNode(current);
+			}
+			current->pNext = current->pNext->pNext;
 		}
 		current = current->pNext;
 	}

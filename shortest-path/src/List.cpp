@@ -28,25 +28,26 @@ List& List::operator=(const List& right) {
 
 ostream& operator<<(std::ostream& os, const List& obj) {
 
-	int totalExpanded = 0;
+	int totalExpanded = 0, total = 0;
 	Node* current = obj.pFirstNode;
 
-	os	<< endl << "===============================================" << endl << endl
+	os	<< "================================================" << endl
 		<< "Name" << "\t"
 		<< "Parent" << "\t"
 		<< "Cost" << "\t"
 		<< "Huris" << "\t" 
 		<< "Expand" << "\t"
 		<< "Explored" << endl
-		<< "-----------------------------------------------" << endl;
+		<< "------------------------------------------------" << endl;
 	
 	while (current != NULL) {
 		os << *current << endl;
 		totalExpanded += current->isExplored() ? 1 : 0;
+		total++;
 		current = current->getNext();
 	}
 
-	os << endl << "Total Expanded Nodes: " << totalExpanded << endl;
+	os << "Total Expanded Nodes: " << totalExpanded << " of " << total << endl;
 	return os;
 }
 
@@ -68,14 +69,14 @@ void List::setLastNode(Node* LastNode) { this->pLastNode = LastNode; }
 void List::printResult(){
 	
 	Node* current = this->pCurrentNode;
-	cout << endl << "===============================================" << endl << endl
+	cout << "==================== RESULT ====================" << endl
 		<< "Name" << "\t"
 		<< "Parent" << "\t"
 		<< "Cost" << "\t"
 		<< "Huris" << "\t" 
 		<< "Expand" << "\t"
 		<< "Explored" << endl
-		<< "-----------------------------------------------" << endl;
+		<< "------------------------------------------------" << endl;
 
 	while (current != NULL){
 		cout << *current << endl;

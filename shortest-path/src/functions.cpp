@@ -13,11 +13,11 @@ void acquireLinks(vector<Link> &links) {
 
 	while (city1 !='0' && city2 != '0' && weight != 0) {
 		if (city1 == city2) {
-			cout << "a start city can't be the destination \n";
+			cout << "a start city can't be the destination" << endl;
 			continue;
 		}
 		if (weight == 0) {
-			cout << "weight can't be 0 \n";
+			cout << "weight can't be 0" << endl;
 			continue;
 		}
 

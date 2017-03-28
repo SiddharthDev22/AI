@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 	cout << "       Goal city: ";
 	cin >> endCity;
 	cout << endl;
-	
+
 	Node* currentNode = new Node(startCity);
 	List* frontier = new List(currentNode);
 
@@ -21,18 +21,17 @@ int main(int argc, char** argv) {
 		cout << links[i] << endl;
 	}
 
-	while (!currentNode->isGoal(endCity)) {
+	while ( (currentNode != NULL) && (!currentNode->isGoal(endCity)) ) {
 		currentNode->expand(links, frontier);
 		currentNode = frontier->getNextNode();
-		cout << *frontier;
-		if (currentNode == NULL) {
-			cout << "\n\n================ NO SOLUTION =================\n";
-			return 2; // no solution
-		}
+		cout << *frontier << endl;
 	}
-	
-	cout << "\n\n=================== RESULT ====================\n";
-	frontier->printResult();
 
-	return 0;
+	if (currentNode == NULL) {
+		cout << endl << "================= NO SOLUTION =================" << endl;
+		return 2; // no solution
+	} else {
+		frontier->printResult();
+		return 0;
+	}
 }
