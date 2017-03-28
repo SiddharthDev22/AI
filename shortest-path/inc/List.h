@@ -7,7 +7,7 @@ class List {
 public:
 
 	List();
-	List(Node* pFirstNode, Node* pLastNode);
+	List(Node* pFirstNode);
 	virtual ~List();
 
 	List& operator=(const List& right);
@@ -15,6 +15,8 @@ public:
 
 	Node* getFirstNode() const;
 	Node* getLastNode() const;
+	
+	Node* getNextNode();
 
 	void setLastNode(Node* LastNode);
 
@@ -23,6 +25,7 @@ public:
 private:
 	Node* pFirstNode;
 	Node* pLastNode;
+	Node* pCurrentNode;
 };
 
 #endif /* LIST_H */

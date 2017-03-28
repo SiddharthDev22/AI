@@ -8,14 +8,11 @@ Node::Node() {
 	name = cost = huristic = explored = expanded = 0;
 }
 
-Node::Node(char name, Node* pParent, Node* pNext, float cost, bool explored) :
-	name(name),
-	pParent(pParent),
-	pNext(pNext),
-	cost(cost),
-	explored(explored),
-	expanded(NULL),
-	huristic(0) {}
+Node::Node(char name) :
+	name(name) {
+	pParent = pNext = NULL;
+	cost = huristic = explored = expanded = 0;
+}
 
 Node::~Node() {
 	pParent->pNext = NULL;

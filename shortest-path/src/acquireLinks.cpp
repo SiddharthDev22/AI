@@ -10,11 +10,11 @@ void acquireLinks(vector<Link>& links) {
 	char city1 = ' ', city2 = ' ';
 	int weight = 0;
 
-	char* filePath;
+	string filePath;
 	cout << "       File path: ";
 	cin >> filePath;
 
-	ifstream fin(filePath);
+	ifstream fin(filePath.c_str());
 
 	if (fin.is_open()) {
 		while (!fin.eof()) {

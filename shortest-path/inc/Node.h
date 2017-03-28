@@ -5,7 +5,7 @@ class Node {
 public:
 
 	Node();
-	Node(char name, Node* pParent, Node* pNext, float cost, bool explored);
+	Node(char name);
 	virtual ~Node();
 
 	Node& operator=(const Node& right);

@@ -4,12 +4,12 @@
 using namespace std;
 
 List::List() {
-	pFirstNode = pLastNode = NULL;
+	this->pFirstNode = this->pLastNode = this->pCurrentNode = NULL;
 }
 
-List::List(Node* pFirstNode, Node* pLastNode) :
-	pFirstNode (pFirstNode),
-	pLastNode (pLastNode) {}
+List::List(Node* pFirstNode) {
+	this->pFirstNode = this->pLastNode = this->pCurrentNode = pFirstNode;
+}
 
 List::~List() {
 	delete pFirstNode;
@@ -53,6 +53,11 @@ ostream& operator<<(std::ostream& os, const List& obj) {
 Node* List::getFirstNode() const { return this->pFirstNode; }
 Node* List::getLastNode() const { return this->pLastNode; }
 
+Node* List::getNextNode() {
+	this->pCurrentNode = this->pCurrentNode->getNext();
+	return this->pCurrentNode; 
+}
+
 void List::setLastNode(Node* LastNode) { this->pLastNode = LastNode; }
 
 /**
@@ -62,14 +67,18 @@ void List::setLastNode(Node* LastNode) { this->pLastNode = LastNode; }
  */
 void List::printResult(){
 	
-	Node* current = this->pFirstNode;
-	cout << "name" << "\t" 
-		<< "parent" << "\t" 
-		<< "cost" << "\t" 
-		<< "expanded" << endl;
-	
+	Node* current = this->pCurrentNode;
+	cout << endl << "===============================================" << endl << endl
+		<< "Name" << "\t"
+		<< "Parent" << "\t"
+		<< "Cost" << "\t"
+		<< "Huris" << "\t" 
+		<< "Expand" << "\t"
+		<< "Explored" << endl
+		<< "-----------------------------------------------" << endl;
+
 	while (current != NULL){
-		cout << current << endl;
+		cout << *current << endl;
 		current = current->getParent();
 	}
 }

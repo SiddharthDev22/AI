@@ -13,20 +13,19 @@ int main(int argc, char** argv) {
 	cout << "       Goal city: ";
 	cin >> endCity;
 	cout << endl;
-	Node* currentNode = new Node(startCity, NULL, NULL, 0, false);
-	List* frontier = new List(currentNode, currentNode);
+	
+	Node* currentNode = new Node(startCity);
+	List* frontier = new List(currentNode);
 
-	cout << "\n===============================================\n";
 	for (int i = 0; i < links.size(); i++) {
 		cout << links[i] << endl;
 	}
-	cout << "\n===============================================\n";
 
 	while (!currentNode->isGoal(endCity)) {
 		currentNode->expand(links, frontier);
-		currentNode = currentNode->getNext();
+		currentNode = frontier->getNextNode();
 		cout << *frontier;
-		if(currentNode == NULL) {
+		if (currentNode == NULL) {
 			cout << "\n\n================ NO SOLUTION =================\n";
 			return 2; // no solution
 		}
