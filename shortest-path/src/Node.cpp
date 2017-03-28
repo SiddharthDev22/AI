@@ -41,9 +41,10 @@ Node& Node::operator=(const Node& right) {
 ostream& operator<<(std::ostream& os, const Node& obj) {
 	os	<< obj.name << "\t"
 		<< (obj.pParent != NULL ? obj.pParent->name : ' ') << "\t"
-		<< obj.huristic << "\t"
 		<< obj.cost << "\t"
-		<< obj.expanded;
+		<< obj.huristic << "\t"
+		<< obj.expanded << "\t"
+		<< (obj.explored ? "+ True" : "- False");
 	return os;
 }
 
@@ -66,15 +67,17 @@ void Node::expand(vector<Link> &links, List* pFrontier) {
 	for (int i = 0; i < links.size(); i++) {
 		if (links[i].getC1() == this->name || links[i].getC2() == this->name) {
 
-			Node tmpNode;
-			tmpNode.name =	(links[i].getC1() == this->name) ? links[i].getC2() : links[i].getC1();
-			tmpNode.pParent = this;
-			tmpNode.cost = this->cost + links[i].getLinkCost();
-			//<<<<<<<<<<<<<<<<<<<< find the huristic
+			Node* tmpNode = new Node();
+			tmpNode->name =	(links[i].getC1() == this->name) ? links[i].getC2() : links[i].getC1();
+			tmpNode->pParent = this;
+			tmpNode->cost = this->cost + links[i].getLinkCost();
+			//<<<<<<<<<<<<<<<<<<<< LATER: huristic
 
-			if (tmpNode.isQualified(pFrontier)) {
-				tmpNode.pushNodeToList(pFrontier);
+			if (tmpNode->isQualified(pFrontier)) {
+				tmpNode->pushNodeToList(pFrontier);
 				this->expanded++;
+			} else {
+				delete tmpNode;
 			}
 		}
 	}
@@ -91,7 +94,8 @@ void Node::rmNodeFromList(List* pFrontier) {
 
 	while (current != NULL) {
 		if (current->pParent == this) {
-			current->rmNodeFromList(pFrontier);
+			//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< fix recurgent
+			//current->rmNodeFromList(pFrontier);
 			delete current;
 		} else if (current->pNext == this) {
 			current->pNext = current->pNext == NULL ? NULL : current->pNext->pNext;

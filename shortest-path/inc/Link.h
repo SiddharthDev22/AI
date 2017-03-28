@@ -14,6 +14,8 @@ public:
 	char getC2() const;
 	float getLinkCost() const;
 	
+	friend std::ostream& operator<<(std::ostream& os, const Link& obj);
+
 private:
 	char c1;
 	char c2;

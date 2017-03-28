@@ -26,3 +26,10 @@ Link& Link::operator=(const Link& right) {
 char Link::getC1() const { return this->c1; }
 char Link::getC2() const { return this->c2; }
 float Link::getLinkCost() const { return this->linkCost; }
+
+ostream& operator<<(std::ostream& os, const Link& obj) {
+	os  << obj.c1 << "\t"
+		<< obj.c2 << "\t"
+		<< obj.linkCost;
+	return os;
+}

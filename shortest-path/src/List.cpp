@@ -28,24 +28,32 @@ List& List::operator=(const List& right) {
 
 ostream& operator<<(std::ostream& os, const List& obj) {
 
+	int totalExpanded = 0;
 	Node* current = obj.pFirstNode;
-	os << "name" << "\t" 
-		<< "parent" << "\t" 
-		<< "cost" << "\t" 
-		<< "expanded";
+
+	os	<< endl << "===============================================" << endl << endl
+		<< "Name" << "\t"
+		<< "Parent" << "\t"
+		<< "Cost" << "\t"
+		<< "Huris" << "\t" 
+		<< "Expand" << "\t"
+		<< "Explored" << endl
+		<< "-----------------------------------------------" << endl;
 	
-	while (current != NULL){
-		os << current;
+	while (current != NULL) {
+		os << *current << endl;
+		totalExpanded += current->isExplored() ? 1 : 0;
 		current = current->getNext();
 	}
 
+	os << endl << "Total Expanded Nodes: " << totalExpanded << endl;
 	return os;
 }
 
 Node* List::getFirstNode() const { return this->pFirstNode; }
 Node* List::getLastNode() const { return this->pLastNode; }
 
-void List::setLastNode(Node* LastNode) { pLastNode = LastNode; }
+void List::setLastNode(Node* LastNode) { this->pLastNode = LastNode; }
 
 /**
  * print to console the solution path along with its cost
@@ -58,10 +66,10 @@ void List::printResult(){
 	cout << "name" << "\t" 
 		<< "parent" << "\t" 
 		<< "cost" << "\t" 
-		<< "expanded";
+		<< "expanded" << endl;
 	
 	while (current != NULL){
-		cout << current;
+		cout << current << endl;
 		current = current->getParent();
 	}
 }

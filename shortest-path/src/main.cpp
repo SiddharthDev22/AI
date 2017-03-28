@@ -12,22 +12,27 @@ int main(int argc, char** argv) {
 	cin >> startCity;
 	cout << "       Goal city: ";
 	cin >> endCity;
-
+	cout << endl;
 	Node* currentNode = new Node(startCity, NULL, NULL, 0, false);
 	List* frontier = new List(currentNode, currentNode);
-	
-	while(!currentNode->isGoal(endCity)){
+
+	cout << "\n===============================================\n";
+	for (int i = 0; i < links.size(); i++) {
+		cout << links[i] << endl;
+	}
+	cout << "\n===============================================\n";
+
+	while (!currentNode->isGoal(endCity)) {
 		currentNode->expand(links, frontier);
 		currentNode = currentNode->getNext();
-		cout << "\n\n========================================\n"
-			 << frontier;
+		cout << *frontier;
 		if(currentNode == NULL) {
-			cout << "\n\n============= NO SOLUTION ==============\n";
-			return 1; // no solution
+			cout << "\n\n================ NO SOLUTION =================\n";
+			return 2; // no solution
 		}
 	}
 	
-	cout << "\n\n================ RESULT ================\n";
+	cout << "\n\n=================== RESULT ====================\n";
 	frontier->printResult();
 
 	return 0;
