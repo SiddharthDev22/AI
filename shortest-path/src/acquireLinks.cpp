@@ -11,8 +11,9 @@ void acquireLinks(vector<Link>& links) {
 	int weight = 0;
 
 	string filePath;
-	cout << "       File path: ";
+	cout << "   Links File path: ";
 	cin >> filePath;
+	filePath = "test\\" + filePath + ".lin";
 
 	ifstream fin(filePath.c_str());
 
@@ -36,6 +37,27 @@ void acquireLinks(vector<Link>& links) {
 
 	} else {
 		cout << "Unable to open file";
+	}
+
+}
+
+void acquireHuristics(std::map<char,float>& huristicMap) {
+	
+	string filePath;
+	cout << "Huristic File path: ";
+	cin >> filePath;
+	filePath = "test\\" + filePath + ".hur";
+
+	ifstream fin(filePath.c_str());
+
+	char city = ' ';
+	float weight = 0;
+	cout << "City -> huristic" << endl;
+	fin >> city >> weight;
+
+	while (city !='0' && weight != 0) {
+		huristicMap[city] = weight;
+		fin >> city >> weight;
 	}
 
 }

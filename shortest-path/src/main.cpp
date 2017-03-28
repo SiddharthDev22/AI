@@ -2,18 +2,6 @@
 
 using namespace std;
 
-void acquireHuristic(std::map<char,float>& huristicMap) {
-	char city = ' ';
-	float weight = 0;
-	cout << "City -> huristic" << endl;
-	cin >> city >> weight;
-
-	while (city !='0' && weight != 0) {
-		huristicMap[city] = weight;
-		cin >> city >> weight;
-	}
-}
-
 int main(int argc, char** argv) {
 	std::vector<Link> links;
 	std::map<char,float> huristicMap;
@@ -28,7 +16,7 @@ int main(int argc, char** argv) {
 	cin >> algori;
 
 	if (algori == HURISTIC || algori == ASTAR) {
-		acquireHuristic(huristicMap);
+		acquireHuristics(huristicMap);
 	}
 
 	Node* currentNode = new Node(startCity);

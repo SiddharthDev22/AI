@@ -25,7 +25,7 @@ public:
 
 	float calcCost(int algo);
 
-	void expand(std::vector<Link> &links, std::map<char,float>& huristicMap, List* pFrontier);
+	void expand(std::vector<Link> &links, std::map<char, float>& huristicMap, List* pFrontier);
 	void pushNodeToList(List* pFrontier);
 	void rmNodeFromList(List* pFrontier);
 	bool isQualified(List* pFrontier);
