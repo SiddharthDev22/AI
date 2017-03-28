@@ -73,6 +73,8 @@ Node* List::getNextNode(int algo) {
 				}
 				current = current->getNext();
 			}
+			this->pCurrentNode = smallest;
+			return this->pCurrentNode;
 	}
 
 }

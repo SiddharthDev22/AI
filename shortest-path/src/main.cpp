@@ -7,19 +7,18 @@ int main(int argc, char** argv) {
 	std::map<char,float> huristicMap;
 	char startCity, endCity;
 	int algori;
-	acquireLinks(links);
 
-	cout << "Start -> Goal city: ";
-	cin >> startCity >> endCity;
 	cout << "1->BFS \t| 2->A* \t| 3->UCS \t| 4->Huristic "<< endl;
 	cout << " pick an algorithm: ";
 	cin >> algori;
-
+	acquireLinks(links);
 	if (algori == HURISTIC || algori == ASTAR) {
 		acquireHuristics(huristicMap);
 	}
+	cout << "Start -> Goal city: ";
+	cin >> startCity >> endCity;
 
-	Node* currentNode = new Node(startCity);
+	Node* currentNode = new Node(startCity, huristicMap[startCity]);
 	List* frontier = new List(currentNode);
 
 	for (int i = 0; i < links.size(); i++) {

@@ -5,7 +5,7 @@ class Node {
 public:
 
 	Node();
-	Node(char name);
+	Node(char name, float huristic);
 	virtual ~Node();
 
 	Node& operator=(const Node& right);
