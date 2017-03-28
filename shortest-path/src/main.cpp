@@ -2,17 +2,34 @@
 
 using namespace std;
 
-int main(int argc, char** argv) {
-	vector<Link> links;
-	char startCity, endCity;
+void acquireHuristic(std::map<char,float>& huristicMap) {
+	char city = ' ';
+	float weight = 0;
+	cout << "City -> huristic" << endl;
+	cin >> city >> weight;
 
+	while (city !='0' && weight != 0) {
+		huristicMap[city] = weight;
+		cin >> city >> weight;
+	}
+}
+
+int main(int argc, char** argv) {
+	std::vector<Link> links;
+	std::map<char,float> huristicMap;
+	char startCity, endCity;
+	int algori;
 	acquireLinks(links);
 
-	cout << "      Start city: ";
-	cin >> startCity;
-	cout << "       Goal city: ";
-	cin >> endCity;
-	cout << endl;
+	cout << "Start -> Goal city: ";
+	cin >> startCity >> endCity;
+	cout << "1->BFS \t| 2->A* \t| 3->UCS \t| 4->Huristic "<< endl;
+	cout << " pick an algorithm: ";
+	cin >> algori;
+
+	if (algori == HURISTIC || algori == ASTAR) {
+		acquireHuristic(huristicMap);
+	}
 
 	Node* currentNode = new Node(startCity);
 	List* frontier = new List(currentNode);
@@ -22,8 +39,8 @@ int main(int argc, char** argv) {
 	}
 
 	while ( (currentNode != NULL) && (!currentNode->isGoal(endCity)) ) {
-		currentNode->expand(links, frontier);
-		currentNode = frontier->getNextNode();
+		currentNode->expand(links, huristicMap, frontier);
+		currentNode = frontier->getNextNode(algori);
 		cout << *frontier << endl;
 	}
 

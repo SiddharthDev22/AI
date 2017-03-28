@@ -20,9 +20,12 @@ public:
 	Node* getParent() const;
 	Node* getNext() const;
 	float getCost() const;
+	float getHuristic() const;
 	int getExpanded() const;
 
-	void expand(std::vector<Link> &links, List* pFrontier);
+	float calcCost(int algo);
+
+	void expand(std::vector<Link> &links, std::map<char,float>& huristicMap, List* pFrontier);
 	void pushNodeToList(List* pFrontier);
 	void rmNodeFromList(List* pFrontier);
 	bool isQualified(List* pFrontier);
@@ -34,9 +37,9 @@ private:
 	Node* pParent;
 	Node* pNext;
 	float cost;
+	float huristic;
 	bool explored;
 	int expanded;
-	int huristic;
 };
 
 #endif /* NODE_H */

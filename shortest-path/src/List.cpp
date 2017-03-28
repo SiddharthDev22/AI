@@ -54,9 +54,27 @@ ostream& operator<<(std::ostream& os, const List& obj) {
 Node* List::getFirstNode() const { return this->pFirstNode; }
 Node* List::getLastNode() const { return this->pLastNode; }
 
-Node* List::getNextNode() {
-	this->pCurrentNode = this->pCurrentNode->getNext();
-	return this->pCurrentNode; 
+Node* List::getNextNode(int algo) {
+
+	switch (algo) {
+		case BFS :
+			this->pCurrentNode = this->pCurrentNode->getNext();
+			return this->pCurrentNode;
+		case ASTAR :
+		case UCS :
+		case HURISTIC:
+			Node* current = this->pFirstNode;
+			Node* smallest = NULL;
+			float smallestCost = numeric_limits<float>::max();
+			while (current != NULL) {
+				if ( (!current->isExplored()) && (smallestCost > current->calcCost(algo)) ) {
+					smallest = current;
+					smallestCost = current->calcCost(algo);
+				}
+				current = current->getNext();
+			}
+	}
+
 }
 
 void List::setLastNode(Node* LastNode) { this->pLastNode = LastNode; }
@@ -66,7 +84,7 @@ void List::setLastNode(Node* LastNode) { this->pLastNode = LastNode; }
  * It should also display number of nodes expanded 
  * i.e. how many times the method node::expand(vector<link>, list*) was called
  */
-void List::printResult(){
+void List::printResult() {
 	
 	Node* current = this->pCurrentNode;
 	cout << "==================== RESULT ====================" << endl
@@ -78,7 +96,7 @@ void List::printResult(){
 		<< "Explored" << endl
 		<< "------------------------------------------------" << endl;
 
-	while (current != NULL){
+	while (current != NULL) {
 		cout << *current << endl;
 		current = current->getParent();
 	}

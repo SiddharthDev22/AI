@@ -7,6 +7,11 @@ class List;
 
 #include <iostream>
 #include <vector>
+#include <map>
+#include <string>
+#include <limits>
+
+enum : int { BFS = 1, ASTAR, UCS, HURISTIC };
 
 #include "Node.h"
 #include "Link.h"

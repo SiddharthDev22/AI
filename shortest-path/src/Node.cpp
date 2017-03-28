@@ -50,15 +50,25 @@ bool Node::isGoal(char goalCity) { return this->name == goalCity; }
 char Node::getName() const { return this->name; }
 Node* Node::getParent() const { return this->pParent; }
 Node* Node::getNext() const { return this->pNext; }
-float Node::getCost() const { return this->cost + this->huristic; }
+float Node::getCost() const { return this->cost; }
+float Node::getHuristic() const { return this->huristic; }
 bool Node::isExplored() const { return this->explored; }
 int Node::getExpanded() const { return this->expanded; }
+
+float Node::calcCost(int algo) {
+	switch(algo) {
+		case ASTAR    : return this->huristic + this->cost;
+		case UCS      : return this->cost;
+		case HURISTIC : return this->huristic;
+		default       : return 0;
+	}
+}
 
 /**
  * finds potential sibling nodes of the calling node 
  * pushes potential nodes to list pFrontier (by calling pushNodetoList(pFrontier)).
  */
-void Node::expand(vector<Link> &links, List* pFrontier) {
+void Node::expand(vector<Link> &links, std::map<char,float>& huristicMap, List* pFrontier) {
 	this->explored = true;
 
 	for (int i = 0; i < links.size(); i++) {
@@ -68,7 +78,7 @@ void Node::expand(vector<Link> &links, List* pFrontier) {
 			tmpNode->name =	(links[i].getC1() == this->name) ? links[i].getC2() : links[i].getC1();
 			tmpNode->pParent = this;
 			tmpNode->cost = this->cost + links[i].getLinkCost();
-			//<<<<<<<<<<<<<<<<<<<< LATER: huristic
+			tmpNode->huristic = huristicMap[tmpNode->name];
 
 			if (tmpNode->isQualified(pFrontier)) {
 				tmpNode->pushNodeToList(pFrontier);

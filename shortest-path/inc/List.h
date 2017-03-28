@@ -16,7 +16,7 @@ public:
 	Node* getFirstNode() const;
 	Node* getLastNode() const;
 	
-	Node* getNextNode();
+	Node* getNextNode(int algo);
 
 	void setLastNode(Node* LastNode);
 
