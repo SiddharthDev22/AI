@@ -24,6 +24,7 @@ public:
 
 	void expand(std::vector<Link> &links, List* pFrontier);
 	void pushNodeToList(List* pFrontier);
+	void rmNodeFromList(List* pFrontier);
 	bool isQualified(List* pFrontier);
 
 	friend std::ostream& operator<<(std::ostream& os, const Node& obj);

@@ -175,9 +175,9 @@ You should build the following 2 functions:
 	It should also display number of nodes expanded (i.e. how many times the method `node::expand(vector<link>, list*)` was called).   
 * `void list::printList(void)`   
 	update this function such that it prints to console (for a given node):   
-	name | parent's name | cost
-	-----|---------------|-----
-	b    | a             | 4   
+	 name | parent's name | cost
+	------|---------------|-----
+	 b    | a             | 4   
 	Also, update all the required methods/classes such that the algorithm is capable of solving the search problem using any of the 5 studied algorithms.   
 
 

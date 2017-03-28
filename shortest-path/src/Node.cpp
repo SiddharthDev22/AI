@@ -39,12 +39,11 @@ Node& Node::operator=(const Node& right) {
 }
 
 ostream& operator<<(std::ostream& os, const Node& obj) {
-	os << obj.name << "\t\t" 
-		<< (obj.pParent != NULL ? obj.pParent->name : ' ') << "\t\t" 
-		<< obj.huristic << "\t\t" 
-		<< obj.cost << "\t\t" 
+	os	<< obj.name << "\t"
+		<< (obj.pParent != NULL ? obj.pParent->name : ' ') << "\t"
+		<< obj.huristic << "\t"
+		<< obj.cost << "\t"
 		<< obj.expanded;
-
 	return os;
 }
 
@@ -70,7 +69,8 @@ void Node::expand(vector<Link> &links, List* pFrontier) {
 			Node tmpNode;
 			tmpNode.name =	(links[i].getC1() == this->name) ? links[i].getC2() : links[i].getC1();
 			tmpNode.pParent = this;
-			tmpNode.cost = this->cost + links[i].getLinkCost(); // <<<<<<<<<<<<<<<
+			tmpNode.cost = this->cost + links[i].getLinkCost();
+			//<<<<<<<<<<<<<<<<<<<< find the huristic
 
 			if (tmpNode.isQualified(pFrontier)) {
 				tmpNode.pushNodeToList(pFrontier);
@@ -82,9 +82,23 @@ void Node::expand(vector<Link> &links, List* pFrontier) {
 }
 
 void Node::pushNodeToList(List* pFrontier) {
-	//<<<<<<<<<<<<<<<<<<<<
 	pFrontier->getLastNode()->pNext = this;
 	pFrontier->setLastNode(this);
+}
+
+void Node::rmNodeFromList(List* pFrontier) {
+	Node* current = pFrontier->getFirstNode();
+
+	while (current != NULL) {
+		if (current->pParent == this) {
+			current->rmNodeFromList(pFrontier);
+			delete current;
+		} else if (current->pNext == this) {
+			current->pNext = current->pNext == NULL ? NULL : current->pNext->pNext;
+			this->pNext = this->pNext == NULL ? NULL : this->pNext->pNext;
+		}
+		current = current->pNext;
+	}
 }
 
 /**
@@ -93,16 +107,24 @@ void Node::pushNodeToList(List* pFrontier) {
  * @param pFrontier
  * @return 
  */
-bool Node::isQualified(List* pFrontier){
+bool Node::isQualified(List* pFrontier) {
 
 	Node* current = pFrontier->getFirstNode();
-	
-	// if not same as parrent
 
-	while (current != NULL){
-		if(current->name == this->name){
+	while (current != NULL) {
+		if(current->name == this->name) {
 			//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+			if (current->getCost() > this->getCost()) {
+				// found one with larger cost, time to replace
+				//<<<<<<<<<<<<<<<<<<<< should remove it siblings here
+				current->rmNodeFromList(pFrontier);
+				delete current;
+				return true;
+			} else {
+				return false; // found one with a cheaper or similar cost
+			}
 		}
 		current = current->getNext();
 	}
+	return true; // didn't find any repetition
 }

@@ -8,9 +8,9 @@ int main(int argc, char** argv) {
 
 	acquireLinks(links);
 
-	cout << "      Start City: ";
+	cout << "      Start city: ";
 	cin >> startCity;
-	cout << "Destination City: ";
+	cout << "       Goal city: ";
 	cin >> endCity;
 
 	Node* currentNode = new Node(startCity, NULL, NULL, 0, false);
@@ -19,12 +19,14 @@ int main(int argc, char** argv) {
 	while(!currentNode->isGoal(endCity)){
 		currentNode->expand(links, frontier);
 		currentNode = currentNode->getNext();
-		if(currentNode == NULL) {
-			return 1; // no solution
-		}
 		cout << "\n\n========================================\n"
 			 << frontier;
+		if(currentNode == NULL) {
+			cout << "\n\n============= NO SOLUTION ==============\n";
+			return 1; // no solution
+		}
 	}
+	
 	cout << "\n\n================ RESULT ================\n";
 	frontier->printResult();
 
