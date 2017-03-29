@@ -12,20 +12,23 @@ public:
 
 	List& operator=(const List& right);
 	friend std::ostream& operator<<(std::ostream& os, const List& obj);
+	void printResult();
 
+	void setLastNode(Node* LastNode);
+	
 	Node* getFirstNode() const;
 	Node* getLastNode() const;
 	
 	Node* getNextNode(int algo);
 
-	void setLastNode(Node* LastNode);
-
-	void printResult();
-
 private:
 	Node* pFirstNode;
 	Node* pLastNode;
 	Node* pCurrentNode;
+
+	Node* getNextNodeGREDY(int algo);
+	Node* getNextNodeBFS(int algo);
+	Node* getNextNodeDFS(int algo);
 };
 
 #endif /* LIST_H */

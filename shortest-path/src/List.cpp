@@ -51,35 +51,6 @@ ostream& operator<<(std::ostream& os, const List& obj) {
 	return os;
 }
 
-Node* List::getFirstNode() const { return this->pFirstNode; }
-Node* List::getLastNode() const { return this->pLastNode; }
-
-Node* List::getNextNode(int algo) {
-
-	switch (algo) {
-		case BFS :
-			this->pCurrentNode = this->pCurrentNode->getNext();
-			return this->pCurrentNode;
-		case ASTAR :
-		case UCS :
-		case HURISTIC:
-			Node* current = this->pFirstNode;
-			Node* smallest = NULL;
-			float smallestCost = numeric_limits<float>::max();
-			while (current != NULL) {
-				if ( (!current->isExplored()) && (smallestCost > current->calcCost(algo)) ) {
-					smallest = current;
-					smallestCost = current->calcCost(algo);
-				}
-				current = current->getNext();
-			}
-			this->pCurrentNode = smallest;
-			return this->pCurrentNode;
-	}
-
-}
-
-void List::setLastNode(Node* LastNode) { this->pLastNode = LastNode; }
 
 /**
  * print to console the solution path along with its cost
@@ -102,4 +73,48 @@ void List::printResult() {
 		cout << *current << endl;
 		current = current->getParent();
 	}
+}
+
+void List::setLastNode(Node* LastNode) { this->pLastNode = LastNode; }
+
+Node* List::getFirstNode() const { return this->pFirstNode; }
+Node* List::getLastNode() const { return this->pLastNode; }
+
+Node* List::getNextNode(int algo) {
+	switch (algo) {
+		case DFS :
+			return this->getNextNodeDFS(algo);
+		case BFS :
+			return this->getNextNodeBFS(algo);
+		case ASTAR :
+		case UCS :
+		case HURISTIC:
+			return this->getNextNodeGREDY(algo);
+	}
+}
+
+Node* List::getNextNodeBFS(int algo) {
+	this->pCurrentNode = this->pCurrentNode->getNext();
+	return this->pCurrentNode;
+}
+
+Node* List::getNextNodeGREDY(int algo) {
+	Node* current = this->pFirstNode;
+	Node* smallest = NULL;
+	float smallestCost = numeric_limits<float>::max();
+
+	while (current != NULL) {
+		if ( (!current->isExplored()) && (smallestCost > current->calcCost(algo)) ) {
+			smallest = current;
+			smallestCost = current->calcCost(algo);
+		}
+		current = current->getNext();
+	}
+
+	this->pCurrentNode = smallest;
+	return this->pCurrentNode;
+}
+
+Node* List::getNextNodeDFS(int algo) {
+
 }

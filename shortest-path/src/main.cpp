@@ -8,7 +8,12 @@ int main(int argc, char** argv) {
 	char startCity, endCity;
 	int algori;
 
-	cout << "1->BFS \t| 2->A* \t| 3->UCS \t| 4->Huristic "<< endl;
+	cout << BFS << "->BFS \t| "
+		<< ASTAR << "->A* \t| "
+		<< UCS << "->UCS \t| "
+		<< HURISTIC <<"->Huristic \t| "
+		<< DFS << "->DFS \t| "<< endl;
+		
 	cout << " pick an algorithm: ";
 	cin >> algori;
 	acquireLinks(links);
