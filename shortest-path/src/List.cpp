@@ -116,5 +116,16 @@ Node* List::getNextNodeGREDY(int algo) {
 }
 
 Node* List::getNextNodeDFS(int algo) {
+	Node* current = this->pFirstNode;
+	Node* lastUnExplored =  this->pFirstNode;
 
+	while (current != NULL) {
+		if (!current->isExplored()) {
+			lastUnExplored = current;
+		}
+		current = current->getNext();
+	}
+
+	this->pCurrentNode = (lastUnExplored->isExplored()) ? NULL : lastUnExplored;
+	return this->pCurrentNode;
 }

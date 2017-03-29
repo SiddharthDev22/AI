@@ -12,8 +12,8 @@ int main(int argc, char** argv) {
 		<< ASTAR << "->A* \t| "
 		<< UCS << "->UCS \t| "
 		<< HURISTIC <<"->Huristic \t| "
-		<< DFS << "->DFS \t| "<< endl;
-		
+		<< DFS << "->DFS"<< endl;
+
 	cout << " pick an algorithm: ";
 	cin >> algori;
 	acquireLinks(links);
