@@ -21,7 +21,7 @@ void acquireLinks(vector<Link> &links) {
 			continue;
 		}
 
-		links.push_back(*new Link(city1, city2, weight));
+		links.push_back(Link(city1, city2, weight));
 
 		cin >> city1 >> city2 >> weight;
 	}
