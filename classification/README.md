@@ -9,7 +9,7 @@ Find the expectation, the variance and the standard deviation for the random var
 Problem 2:-
 ------------
 
-The data in file problem2.dat represents a training set of size 300 samples with feature vectors ∈ R20. Find the covariance matrix of the set&#39;s features. Note: every 300 consecutive readings from the file represent one row in X. (Hint: build a 20x300 matrix, X, from the data given then find the covariance matrix for it).
+The data in file problem2.dat represents a training set of size 300 samples with feature vectors ∈ R20. Find the covariance matrix of the set's features. Note: every 300 consecutive readings from the file represent one row in X. (Hint: build a 20x300 matrix, X, from the data given then find the covariance matrix for it).
 
 Problem 3:-
 ------------
