@@ -11,12 +11,7 @@ main <- function() {
 	
 	qdaModel = qda(trainingSetFrame, grouping = labelSetMat)
 	
-	# change the colum names to test1, test2, ...
-	colnames(testSetMat) <-	paste("test" , 1:ncol(testSetMat), sep = "")
-
-	testCount = nrow(testSetMat)
-	
-	for(i in 1 : testCount) {
+	for(i in 1 : nrow(testSetMat)) {
 		class = predict(qdaModel, testSetMat[ ,i])$class
 		cat(paste("test", i, "in", class, "\n"))
 	}
