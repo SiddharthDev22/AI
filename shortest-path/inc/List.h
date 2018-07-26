@@ -26,7 +26,7 @@ private:
 	Node* pLastNode;
 	Node* pCurrentNode;
 
-	Node* getNextNodeGREDY(int algo);
+	Node* getNextNodeUCS(int algo);
 	Node* getNextNodeBFS(int algo);
 	Node* getNextNodeDFS(int algo);
 };

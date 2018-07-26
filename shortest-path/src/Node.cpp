@@ -5,12 +5,11 @@ using namespace std;
 
 Node::Node() {
 	pParent = pNext = NULL;
-	name = cost = huristic = explored = expanded = 0;
+	name = cost = explored = expanded = 0;
 }
 
-Node::Node(char name, float huristic = 0) :
-	name(name),
-	huristic(huristic) {
+Node::Node(char name) :
+	name(name) {
 	pParent = pNext = NULL;
 	cost = explored = expanded = 0;
 }
@@ -30,7 +29,6 @@ Node& Node::operator=(const Node& right) {
 	this->pNext = right.pNext;
 	this->cost = right.cost;
 	this->explored = right.explored;
-	this->huristic = right.huristic;
 	this->expanded = right.expanded;
 	
 	return *this;
@@ -40,7 +38,6 @@ ostream& operator<<(std::ostream& os, const Node& obj) {
 	os	<< obj.name << "\t"
 		<< (obj.pParent != NULL ? obj.pParent->name : ' ') << "\t"
 		<< obj.cost << "\t"
-		<< obj.huristic << "\t"
 		<< obj.expanded << "\t"
 		<< (obj.explored ? "+ True" : "- False");
 	return os;
@@ -52,16 +49,13 @@ char Node::getName() const { return this->name; }
 Node* Node::getParent() const { return this->pParent; }
 Node* Node::getNext() const { return this->pNext; }
 float Node::getCost() const { return this->cost; }
-float Node::getHuristic() const { return this->huristic; }
 bool Node::isExplored() const { return this->explored; }
 int Node::getExpanded() const { return this->expanded; }
 
 float Node::calcCost(int algo) {
 	switch(algo) {
-		case ASTAR    : return this->huristic + this->cost;
 		case UCS      : return this->cost;
-		case HURISTIC : return this->huristic;
-		default       : return 0;
+		default       : return 0; // bfs and dfs
 	}
 }
 
@@ -69,7 +63,7 @@ float Node::calcCost(int algo) {
  * finds potential sibling nodes of the calling node 
  * pushes potential nodes to list pFrontier (by calling pushNodetoList(pFrontier)).
  */
-void Node::expand(vector<Link> &links, std::map<char,float>& huristicMap, List* pFrontier) {
+void Node::expand(vector<Link> &links, List* pFrontier) {
 	this->explored = true;
 
 	for (int i = 0; i < links.size(); i++) {
@@ -79,7 +73,6 @@ void Node::expand(vector<Link> &links, std::map<char,float>& huristicMap, List* 
 			tmpNode->name =	(links[i].getC1() == this->name) ? links[i].getC2() : links[i].getC1();
 			tmpNode->pParent = this;
 			tmpNode->cost = this->cost + links[i].getLinkCost();
-			tmpNode->huristic = huristicMap[tmpNode->name];
 
 			if (tmpNode->isQualified(pFrontier)) {
 				tmpNode->pushNodeToList(pFrontier);

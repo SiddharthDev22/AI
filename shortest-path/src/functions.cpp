@@ -27,17 +27,3 @@ void acquireLinks(vector<Link> &links) {
 	}
 	
 }
-
-void acquireHuristics(std::map<char,float>& huristicMap) {
-
-	char city = ' ';
-	float weight = 0;
-	cout << "City -> huristic" << endl;
-	cin >> city >> weight;
-
-	while (city !='0' && weight != 0) {
-		huristicMap[city] = weight;
-		cin >> city >> weight;
-	}
-	
-}

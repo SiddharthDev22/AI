@@ -11,7 +11,7 @@ class List;
 #include <string>
 #include <vector>
 
-enum : int { BFS = 1, ASTAR, UCS, HURISTIC , DFS};
+enum : int { BFS = 1, UCS, DFS};
 
 #include "Link.h"
 #include "List.h"

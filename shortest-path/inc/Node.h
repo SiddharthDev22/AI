@@ -5,7 +5,7 @@ class Node {
 public:
 
 	Node();
-	Node(char name, float huristic);
+	Node(char name);
 	virtual ~Node();
 
 	Node& operator=(const Node& right);
@@ -20,12 +20,11 @@ public:
 	Node* getParent() const;
 	Node* getNext() const;
 	float getCost() const;
-	float getHuristic() const;
 	int getExpanded() const;
 
 	float calcCost(int algo);
 
-	void expand(std::vector<Link> &links, std::map<char, float>& huristicMap, List* pFrontier);
+	void expand(std::vector<Link> &links, List* pFrontier);
 	void pushNodeToList(List* pFrontier);
 	void rmNodeFromList(List* pFrontier);
 	bool isQualified(List* pFrontier);
@@ -37,7 +36,6 @@ private:
 	Node* pParent;
 	Node* pNext;
 	float cost;
-	float huristic;
 	bool explored;
 	int expanded;
 };

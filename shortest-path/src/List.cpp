@@ -34,8 +34,7 @@ ostream& operator<<(std::ostream& os, const List& obj) {
 	os	<< "================================================" << endl
 		<< "Name" << "\t"
 		<< "Parent" << "\t"
-		<< "Cost" << "\t"
-		<< "Huris" << "\t" 
+		<< "Cost" << "\t" 
 		<< "Expand" << "\t"
 		<< "Explored" << endl
 		<< "------------------------------------------------" << endl;
@@ -64,7 +63,6 @@ void List::printResult() {
 		<< "Name" << "\t"
 		<< "Parent" << "\t"
 		<< "Cost" << "\t"
-		<< "Huris" << "\t" 
 		<< "Expand" << "\t"
 		<< "Explored" << endl
 		<< "------------------------------------------------" << endl;
@@ -86,10 +84,8 @@ Node* List::getNextNode(int algo) {
 			return this->getNextNodeDFS(algo);
 		case BFS :
 			return this->getNextNodeBFS(algo);
-		case ASTAR :
 		case UCS :
-		case HURISTIC:
-			return this->getNextNodeGREDY(algo);
+			return this->getNextNodeUCS(algo);
 	}
 }
 
@@ -98,7 +94,7 @@ Node* List::getNextNodeBFS(int algo) {
 	return this->pCurrentNode;
 }
 
-Node* List::getNextNodeGREDY(int algo) {
+Node* List::getNextNodeUCS(int algo) {
 	Node* current = this->pFirstNode;
 	Node* smallest = NULL;
 	float smallestCost = numeric_limits<float>::max();
