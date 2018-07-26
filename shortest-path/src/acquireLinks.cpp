@@ -15,7 +15,7 @@ void acquireLinks(vector<Link>& links) {
 	cin >> filePath;
 	filePath = "test\\" + filePath + ".lin";
 
-	ifstream fin("D:/AAGOOGLE/AI/shortest-path/test/1.lin");
+	ifstream fin(filePath.c_str());
 
 	if (fin.is_open()) {
 		while (!fin.eof()) {
